@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 
 class InputEmail extends StatefulWidget {
+  String username = '';
+
+
   @override
-  _InputEmailState createState() => _InputEmailState();
+  State<StatefulWidget> createState() {
+
+    _InputEmailState hey = _InputEmailState();
+    username = hey.username;
+    return hey;
+  }
 }
 
 class _InputEmailState extends State<InputEmail> {
+
+
+  String username = '';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,8 +36,13 @@ class _InputEmailState extends State<InputEmail> {
               color: Colors.white70,
             ),
           ),
+          onChanged:(text){
+            username = text;
+            print("the text $username");
+          },
         ),
       ),
     );
   }
+
 }

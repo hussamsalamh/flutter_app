@@ -9,7 +9,7 @@ class _ForgotState extends State<Forgot> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30, left: 50, right: 50),
+      padding: const EdgeInsets.only(top: 20, right: 190, left: 50),
       child: Container(
         alignment: Alignment.topRight,
         height: 20,

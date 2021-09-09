@@ -9,7 +9,7 @@ class _ButtonNewUserState extends State<ButtonNewUser> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 40, right: 50, left: 200),
+      padding: const EdgeInsets.only(top: 30, right: 50, left: 190),
       child: Container(
         alignment: Alignment.bottomRight,
         height: 50,

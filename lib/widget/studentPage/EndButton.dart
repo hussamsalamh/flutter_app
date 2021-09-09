@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class ButtonLogin extends StatefulWidget {
+
+
+
+class BreakButton extends StatefulWidget {
   @override
-  _ButtonLoginState createState() => _ButtonLoginState();
+  _BreakButtonState createState() => _BreakButtonState();
 }
 
-class _ButtonLoginState extends State<ButtonLogin> {
+class _BreakButtonState extends State<BreakButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 40, right: 50, left: 200),
+      padding: const EdgeInsets.only(top: 20, right: 50, left: 190),
       child: Container(
         alignment: Alignment.bottomRight,
         height: 50,
@@ -37,7 +40,7 @@ class _ButtonLoginState extends State<ButtonLogin> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'OK',
+                'Break',
                 style: TextStyle(
                   color: Colors.lightBlueAccent,
                   fontSize: 14,

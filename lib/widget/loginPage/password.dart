@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 class PasswordInput extends StatefulWidget {
+  String password = '';
   @override
-  _PasswordInputState createState() => _PasswordInputState();
+  State<StatefulWidget> createState() {
+    _PasswordInputState inputState = _PasswordInputState();
+    password = inputState.password;
+    return inputState;
+  }
+
 }
 
 class _PasswordInputState extends State<PasswordInput> {
+  String password = '';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,6 +21,10 @@ class _PasswordInputState extends State<PasswordInput> {
         height: 60,
         width: MediaQuery.of(context).size.width,
         child: TextField(
+          onChanged: (text){
+            password = text;
+            print(password);
+          },
           style: TextStyle(
             color: Colors.white,
           ),
