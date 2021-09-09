@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/buttonNewUser.dart';
-import 'package:project/widget/newEmail.dart';
-import 'package:project/widget/newName.dart';
-import 'package:project/widget/password.dart';
-import 'package:project/widget/singup.dart';
-import 'package:project/widget/textNew.dart';
-import 'package:project/widget/userOld.dart';
-// import 'package:login_minimalist/widget/buttonNewUser.dart';
-// import 'package:login_minimalist/widget/newEmail.dart';
-// import 'package:login_minimalist/widget/newName.dart';
-// import 'package:login_minimalist/widget/password.dart';
-// import 'package:login_minimalist/widget/singup.dart';
-// import 'package:login_minimalist/widget/textNew.dart';
-// import 'package:login_minimalist/widget/userOld.dart';
+import 'package:project/widget/loginPage/buttonNewUser.dart';
+import 'package:project/widget/loginPage/newEmail.dart';
+import 'package:project/widget/loginPage/newName.dart';
+import 'package:project/widget/loginPage/password.dart';
+import 'package:project/widget/loginPage/singup.dart';
+import 'package:project/widget/loginPage/textNew.dart';
+import 'package:project/widget/loginPage/userOld.dart';
 
 class NewUser extends StatefulWidget {
   @override

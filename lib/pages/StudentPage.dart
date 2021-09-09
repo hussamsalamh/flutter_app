@@ -1,58 +1,60 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project/students/StudentsInfo.dart';
+import 'package:project/widget/studentPage/EndButton.dart';
+import 'package:project/widget/studentPage/StartButton.dart';
+import 'package:project/widget/studentPage/StudentInfoButton.dart';
 
 
-class studentListPage extends StatelessWidget {
-
+class StudentPage extends StatefulWidget {
+  late List<StudentsInfo> lst = <StudentsInfo>[];
+  StudentPage(List<StudentsInfo> s){lst = s;}
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Generated App',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-        primaryColor: const Color(0xFF2196f3),
-        accentColor: const Color(0xFF2196f3),
-        canvasColor: const Color(0xFF00aaff),
-      ),
-      home: new MyHomePage(),
-    );
-  }
+  _StudentPage createState() => new _StudentPage(lst);
 }
 
-class MyHomePage extends StatefulWidget {
-  // MyHomePage() ;
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
+class _StudentPage extends State<StudentPage> {
+  late List<StudentsInfo> lst = <StudentsInfo>[];
+  late List<Widget> buttons = <Widget>[];
 
-class _MyHomePageState extends State<MyHomePage> {
+  _StudentPage(List<StudentsInfo>s){lst = s;}
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body:
-      new Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            new Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  new Switch(onChanged: switchChanged, value:true),
+    generateButton();
+    return Scaffold(
+        body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [Colors.blueGrey, Colors.lightBlueAccent]),
+            ),
+            child: ListView(children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[StartButton(), EndButton(lst)],
+                  ),
+                  Divider(
+                    thickness: 5,
+                    height: 30,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              Column(children: buttons,)
+            ])));
 
-                  // new Radio(key:null, groupValue: null, value: .5, onChanged: radioChanged(1.0))
-                ]
-
-            )
-          ]
-
-      ),
-
-    );
   }
-  void switchChanged(bool value) {}
 
-  void radioChanged(double value) {}
-
+  void generateButton() {
+    buttons.clear();
+    for (var i = 0; i < lst.length; i++) {
+      buttons.add(StudentInfoButton(lst[i]));
+    }
+    print(buttons.length);
+  }
 }

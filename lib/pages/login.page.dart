@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project/widget/button.dart';
-import 'package:project/widget/first.dart';
-import 'package:project/widget/inputEmail.dart';
-import 'package:project/widget/password.dart';
-import 'package:project/widget/textLogin.dart';
-import 'package:project/widget/verticalText.dart';
-// import 'package:login_minimalist/widget/button.dart';
-// import 'package:login_minimalist/widget/first.dart';
-// import 'package:login_minimalist/widget/forgot.dart';
-// import 'package:login_minimalist/widget/inputEmail.dart';
-// import 'package:login_minimalist/widget/password.dart';
-// import 'package:login_minimalist/widget/textLogin.dart';
-// import 'package:login_minimalist/widget/verticalText.dart';
+import 'package:project/widget/loginPage/button.dart';
+import 'package:project/widget/loginPage/first.dart';
+import 'package:project/widget/loginPage/inputEmail.dart';
+import 'package:project/widget/loginPage/password.dart';
+import 'package:project/widget/loginPage/textLogin.dart';
+import 'package:project/widget/loginPage/verticalText.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -19,6 +12,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late InputEmail email;
+  late PasswordInput passwordInput;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +33,8 @@ class _LoginPageState extends State<LoginPage> {
                   VerticalText(),
                   TextLogin(),
                 ]),
-                InputEmail(),
-                PasswordInput(),
+                email = InputEmail(),
+                passwordInput = PasswordInput(),
                 ButtonLogin(),
                 FirstTime(),
               ],

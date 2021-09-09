@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:project/pages/StudentPage.dart';
+import 'package:project/students/StudentsInfo.dart';
+
+
+// TODO : Need to give username and password to check them
+
 
 class ButtonLogin extends StatefulWidget {
+
   @override
   _ButtonLoginState createState() => _ButtonLoginState();
 }
 
 class _ButtonLoginState extends State<ButtonLogin> {
+  List<StudentsInfo> lst = <StudentsInfo>[];
+  // _ButtonLoginState(List<StudentsInfo> s){lst = s;}
+  _ButtonLoginState(){
+    lst.clear();
+    lst.add(StudentsInfo('maha', 2));
+    lst.add(StudentsInfo('ahmad', 3));
+    lst.add(StudentsInfo('hello', 1));
+    lst.add(StudentsInfo('zeus', 4));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +49,11 @@ class _ButtonLoginState extends State<ButtonLogin> {
         ),
         child: FlatButton(
           onPressed: () {
-            print('object');
+            // TODO : Check the email and username
+            Navigator.push(
+                context,
+              MaterialPageRoute(builder: (context) => StudentPage(lst)),
+            );
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
