@@ -6,20 +6,32 @@ import 'package:project/widget/behavioral/submitButtom.dart';
 import 'package:project/widget/behavioral/titleBehavior.dart';
 
 class BehavioralPage extends StatefulWidget {
+  late String? id;
   late List<StudentsInfo> lst = <StudentsInfo>[];
+  late String date;
 
-  BehavioralPage(List<StudentsInfo>s){
+  BehavioralPage(List<StudentsInfo> s, String i,String d) {
     lst = s;
+    id = i;
+    date = d;
   }
+
   @override
-  _BehavioralPage createState() => _BehavioralPage(lst);
+  _BehavioralPage createState() => _BehavioralPage(lst, id,date);
 }
 
 class _BehavioralPage extends State<BehavioralPage> {
+  late String? id;
+  late String date;
   late List<StudentsInfo> lst = <StudentsInfo>[];
   late List<Widget> buttons = <Widget>[];
 
-  _BehavioralPage(List<StudentsInfo>s){lst = s;}
+  _BehavioralPage(List<StudentsInfo> s, String? i,String d) {
+    lst = s;
+    id = i;
+    date = d;
+  }
+
   @override
   Widget build(BuildContext context) {
     generateButton();
@@ -42,8 +54,10 @@ class _BehavioralPage extends State<BehavioralPage> {
                     height: 30,
                     color: Colors.white,
                   ),
-                  Column(children: buttons,),
-                  SubmissionButton(lst)
+                  Column(
+                    children: buttons,
+                  ),
+                  SubmissionButton(lst, id,date)
                 ],
               ),
             )));
@@ -54,6 +68,5 @@ class _BehavioralPage extends State<BehavioralPage> {
     for (var i = 0; i < lst.length; i++) {
       buttons.add(StudentSelect(lst[i]));
     }
-    print(buttons.length);
   }
 }

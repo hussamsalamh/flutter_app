@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/students/StudentsInfo.dart';
-
+@immutable
 class StudentSelect extends StatefulWidget {
   late StudentsInfo studentsInfo;
 

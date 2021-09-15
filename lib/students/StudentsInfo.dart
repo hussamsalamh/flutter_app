@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-
+import 'package:intl/intl.dart';
 
 enum Behavior {
   Excellent , Good, Bad
@@ -25,20 +24,40 @@ class pair{
 
 }
 
+class ChartInfo{
+
+  final String x;
+  final double y;
+  ChartInfo(this.x,this.y);
+
+}
+
+
 class StudentsInfo{
 
   // late String account;
   bool inClass = false;
   bool didHomework = false;
+  int  totalTime = 0;
+  late int numberOfHomework ;
   late String name;
   late int idNumber;
   late Behavior behavior;
   late List<pair> time = <pair>[];
-  int  totalTime = 0;
+  late List<ChartInfo> info = <ChartInfo>[];
 
 
-  StudentsInfo(String n,int id){
+  StudentsInfo(String n,int id,int m){
     name = n; idNumber = id;behavior = Behavior.Excellent;
+    numberOfHomework = m;
+  }
+
+  void addElement(DateTime date,double pers){
+    info.add(new ChartInfo(DateFormat('yyyy-MM-dd').format(date),pers));
+  }
+  void addElementDatabase(String date,double pers){
+
+    info.add(ChartInfo(date, pers));
   }
 
 }

@@ -1,79 +1,82 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:project/pages/StudentPage.dart';
+import 'package:project/auth_services/AuthService.dart';
+import 'package:project/pages/mainPage.dart';
 import 'package:project/students/StudentsInfo.dart';
+import 'package:provider/provider.dart';
 
-
-// TODO : Need to give username and password to check them
-
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class ButtonLogin extends StatefulWidget {
+  late String email = '';
+  late String password = '';
+  List<StudentsInfo> lst = <StudentsInfo>[];
+
+  ButtonLogin(String e, String p) {
+    print(e+"   username");
+    print(p+ " pass");
+    if (e.isEmpty || p.isEmpty) {
+      return;
+    }
+  }
 
   @override
-  _ButtonLoginState createState() => _ButtonLoginState();
+  State<StatefulWidget> createState() {
+    return _ButtonLoginState(email, password);
+  }
 }
 
 class _ButtonLoginState extends State<ButtonLogin> {
+  late String email;
+  late String password;
+  late User user;
+
   List<StudentsInfo> lst = <StudentsInfo>[];
-  // _ButtonLoginState(List<StudentsInfo> s){lst = s;}
-  _ButtonLoginState(){
-    lst.clear();
-    lst.add(StudentsInfo('maha', 2));
-    lst.add(StudentsInfo('ahmad', 3));
-    lst.add(StudentsInfo('hello', 1));
-    lst.add(StudentsInfo('zeus', 4));
+
+  _ButtonLoginState(String email, String password) {
+    this.email = email;
+    this.password = password;
   }
 
+  void initState() {
+    _auth.userChanges().listen((event) => setState(() => user = event!));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 50, left: 190),
-      child: Container(
-        alignment: Alignment.bottomRight,
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.blue,
-              blurRadius: 10.0, // has the effect of softening the shadow
-              spreadRadius: 1.0, // has the effect of extending the shadow
-              offset: Offset(
-                5.0, // horizontal, move right 10
-                5.0, // vertical, move down 10
-              ),
-            ),
-          ],
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: FlatButton(
-          onPressed: () {
-            // TODO : Check the email and username
-            Navigator.push(
-                context,
-              MaterialPageRoute(builder: (context) => StudentPage(lst)),
+    return Container(
+      margin: EdgeInsets.all(10),
+      height: 50.0,
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+            side: BorderSide(color: Color.fromRGBO(0, 160, 227, 1))),
+        onPressed: () async {
+          try {
+            print(email + "  username");
+            print(password + "  password");
+            UserCredential user = (await _auth.
+            signInWithEmailAndPassword(email: email, password: password));
+            print(user.user?.uid.toString());
+            print(user.user?.uid.toString());
+          }catch (e){
+            Scaffold.of(context).showSnackBar(
+              const SnackBar(
+                content: Text("failed"),
+              )
             );
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'OK',
-                style: TextStyle(
-                  color: Colors.lightBlueAccent,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Icon(
-                Icons.arrow_forward,
-                color: Colors.lightBlueAccent,
-              ),
-            ],
-          ),
-        ),
+          }
+          // Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => MainPage("Mohand")));
+        },
+        padding: EdgeInsets.all(10.0),
+        color: Colors.white,
+        textColor: Color.fromRGBO(0, 160, 227, 1),
+        child: Text("Ok", style: TextStyle(fontSize: 15)),
       ),
     );
   }
+
 }

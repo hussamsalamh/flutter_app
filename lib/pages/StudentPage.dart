@@ -2,22 +2,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project/students/StudentsInfo.dart';
 import 'package:project/widget/studentPage/EndButton.dart';
-import 'package:project/widget/studentPage/StartButton.dart';
 import 'package:project/widget/studentPage/StudentInfoButton.dart';
 
 
 class StudentPage extends StatefulWidget {
+  late String? id;
   late List<StudentsInfo> lst = <StudentsInfo>[];
-  StudentPage(List<StudentsInfo> s){lst = s;}
+  late DateTime selectedDate;
+  late DateTime startTime;
+  StudentPage(List<StudentsInfo> s,DateTime t,DateTime start,String? i)
+  {lst = s;selectedDate = t;startTime = start;id = i;}
   @override
-  _StudentPage createState() => new _StudentPage(lst);
+  _StudentPage createState() => new _StudentPage(lst,selectedDate,startTime,id);
 }
 
 class _StudentPage extends State<StudentPage> {
+  late String? id;
   late List<StudentsInfo> lst = <StudentsInfo>[];
   late List<Widget> buttons = <Widget>[];
+  late DateTime selectedDate;
+  late DateTime startTime;
 
-  _StudentPage(List<StudentsInfo>s){lst = s;}
+  _StudentPage(List<StudentsInfo>s,DateTime t,DateTime start,String? i)
+  {lst = s;selectedDate = t;startTime = start; id = i;}
   @override
   Widget build(BuildContext context) {
     generateButton();
@@ -36,7 +43,7 @@ class _StudentPage extends State<StudentPage> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[StartButton(), EndButton(lst)],
+                    children: <Widget>[ EndButton(lst,selectedDate,startTime,id)],
                   ),
                   Divider(
                     thickness: 5,
@@ -50,11 +57,12 @@ class _StudentPage extends State<StudentPage> {
 
   }
 
+
+
   void generateButton() {
     buttons.clear();
     for (var i = 0; i < lst.length; i++) {
       buttons.add(StudentInfoButton(lst[i]));
     }
-    print(buttons.length);
   }
 }
